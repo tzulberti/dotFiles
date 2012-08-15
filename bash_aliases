@@ -4,6 +4,11 @@ custom_find()
 }   
 
 
+custom_find_js()                                                                    
+{                                                                                
+    find . -name "*.js" -exec grep -Hni $1 {} \;
+} 
+
 export BOLD=`tput bold`                                                          
 export UNDERLINE_ON=`tput smul`                                                  
 export UNDERLINE_OFF=`tput rmul`                                                 
@@ -44,4 +49,5 @@ mvn-color()
 } 
 
 alias pygrep=custom_find                                                         
+alias jsgrep=custom_find_js
 alias mvnc="mvn-color"   
