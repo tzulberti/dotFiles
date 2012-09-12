@@ -56,10 +56,14 @@ mvn-color()
 alias pygrep=custom_find                                                         
 alias jsgrep=custom_find_js
 alias rbgrep=custom_find_rb
-alias mvnc="mvn-color"   
+alias mvnc="mvn-color"
 alias svnc="python ~/.svn-color.py"
 alias idbmysql='/usr/local/Calpont/mysql/bin/mysql --defaults-file=/usr/local/Calpont/mysql/my.cnf -u root'
 
 
 
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
+
+if [ -f ~/.bash_aliases_trabajo ]; then
+    . ~/.bash_aliases_trabajo
+fi
