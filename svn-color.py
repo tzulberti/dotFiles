@@ -35,7 +35,7 @@ statusColors = {
     "A" : Fore.GREEN, # green
     "X" : Fore.YELLOW, # yellow
     "C" : Back.BLACK + Fore.RED , # black on red
-    "-" : Fore.GREEN, # red
+    "-" : Fore.RED, # red
     "D" : Style.DIM + Fore.RED, # bold red
     "\+" : Fore.GREEN, # green
     "!": Fore.CYAN,
@@ -49,7 +49,7 @@ statusColors = {
 def colorize(line):
     for color in statusColors:
         if re.match(color, line):
-            print statusColors[color] + line
+            print statusColors[color] + line + Fore.RESET + Back.RESET + Style.RESET_ALL
             return
     else:
         print line
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     cancelled = False
     for line in output.stdout:
         line = line.expandtabs(tabsize)
-        line = line.strip()
+        line = line.rstrip()
         if (sys.argv[1] in colorizedSubcommands):
             line = colorize(line)
         else:
