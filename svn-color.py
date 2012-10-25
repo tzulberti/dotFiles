@@ -69,7 +69,10 @@ if __name__ == "__main__":
     cmd = ' '.join(['svn']+[(passthru, quoted)[' ' in arg](arg) for arg in sys.argv[1:]])
     output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     cancelled = False
-    for line in output.stdout:
+    lines = output.stdout.readlines()
+    if sys.argv[1] not in ('diff'):
+        lines.sort()
+    for line in lines:
         line = line.expandtabs(tabsize)
         line = line.rstrip()
         if (sys.argv[1] in colorizedSubcommands):
