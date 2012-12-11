@@ -9,6 +9,11 @@ custom_find_js()
     find . -name "*.js" -exec grep -Hni $1 {} \;
 } 
 
+custom_find_rb()                                                                    
+{                                                                                
+    find . -name "*.rb" -exec grep -Hni $1 {} \;
+} 
+
 export BOLD=`tput bold`                                                          
 export UNDERLINE_ON=`tput smul`                                                  
 export UNDERLINE_OFF=`tput rmul`                                                 
@@ -50,6 +55,18 @@ mvn-color()
 
 alias pygrep=custom_find                                                         
 alias jsgrep=custom_find_js
+alias rbgrep=custom_find_rb
 alias mvnc="mvn-color"   
+
 alias jdownloader="java -jar /opt/local/JDownloader/JDownloader.jar"
 alias sublime="/opt/local/Sublime\ Text\ 2/sublime_text"
+
+alias svnc="python ~/.svn-color.py"
+
+
+
+export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
+
+if [ -f ~/.bash_aliases_trabajo ]; then
+    . ~/.bash_aliases_trabajo
+fi
