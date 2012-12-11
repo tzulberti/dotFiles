@@ -51,3 +51,5 @@ mvn-color()
 alias pygrep=custom_find                                                         
 alias jsgrep=custom_find_js
 alias mvnc="mvn-color"   
+alias jdownloader="java -jar /opt/local/JDownloader/JDownloader.jar"
+alias sublime="/opt/local/Sublime\ Text\ 2/sublime_text"
