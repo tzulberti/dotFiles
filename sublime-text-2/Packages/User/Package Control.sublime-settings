@@ -1,0 +1,15 @@
+{
+	"auto_upgrade_last_run": null,
+	"installed_packages":
+	[
+		"Git",
+		"GitGutter",
+		"Package Control",
+		"Python Imports Sorter",
+		"Restructured Text (RST) Snippets",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SyncedSideBar",
+		"Theme - Soda"
+	]
+}
