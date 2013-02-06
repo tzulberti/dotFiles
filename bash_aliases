@@ -14,6 +14,11 @@ custom_find_rb()
     find . -name "*.rb" -exec grep -Hni $1 {} \;
 } 
 
+custom_find_php() 
+{
+    find . -name "*.php" -exec grep -Hni $1 {} \;
+}
+
 export BOLD=`tput bold`                                                          
 export UNDERLINE_ON=`tput smul`                                                  
 export UNDERLINE_OFF=`tput rmul`                                                 
@@ -56,16 +61,22 @@ mvn-color()
 alias pygrep=custom_find                                                         
 alias jsgrep=custom_find_js
 alias rbgrep=custom_find_rb
+alias phpgrep=custom_find_php
 alias mvnc="mvn-color"   
 
 alias jdownloader="java -jar /opt/local/JDownloader/JDownloader.jar"
 alias sublime="/opt/local/Sublime\ Text\ 2/sublime_text"
+alias ages_2="cd /media/Juegos\ y\ ot/Juegos/Age\ of\ Empires\ II; wine age2_x1.exe"
 
 alias svnc="python ~/.svn-color.py"
 
-
-
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
+
+
+alias arqueria-active="source ~/envs/arqueria/bin/activate"
+alias arqueria-cd="cd /media/data/Proyectos/archery-data/archery_data"
+alias otendor-activate="source ~/envs/otendor-data/bin/activate"
+alias otendor-cd="cd /media/data/Proyectos/otendor-data/otendor"
 
 if [ -f ~/.bash_aliases_trabajo ]; then
     . ~/.bash_aliases_trabajo
