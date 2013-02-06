@@ -62,13 +62,15 @@ alias pygrep=custom_find
 alias jsgrep=custom_find_js
 alias rbgrep=custom_find_rb
 alias phpgrep=custom_find_php
-alias mvnc="mvn-color"   
+
+alias mvnc="mvn-color" 
+alias svnc="python ~/.svn-color.py"
+alias pyclean='find . -name "*.pyc" -exec rm -rf {} \;'
 
 alias jdownloader="java -jar /opt/local/JDownloader/JDownloader.jar"
 alias sublime="/opt/local/Sublime\ Text\ 2/sublime_text"
 alias ages_2="cd /media/Juegos\ y\ ot/Juegos/Age\ of\ Empires\ II; wine age2_x1.exe"
 
-alias svnc="python ~/.svn-color.py"
 
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 
