@@ -1,5 +1,0 @@
-[
-	{
-		"keys": ["command+shift+i"], "command": "sort_imports"
-	}
-]
