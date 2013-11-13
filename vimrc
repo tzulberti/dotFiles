@@ -31,7 +31,7 @@ Bundle 'majutsushi/tagbar'
 " Git integration
 Bundle 'motemen/git-vim'
 " Powerline
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 " Git diff icons on the side of the file lines
 Bundle 'airblade/vim-gitgutter'
 " Python code checker
@@ -45,6 +45,14 @@ Bundle "tpope/vim-vividchalk"
 
 " Colores en los archivos de css
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+" Configuracion de Go
+Bundle 'https://github.com/jnwhiteh/vim-golang.git'
+
+" Como el Powerline pero sin necesitar de python
+Bundle 'https://github.com/itchyny/lightline.vim.git'
+
+" Para las cosas de git
+Bundle 'https://github.com/tpope/vim-fugitive.git'
 
 " Cada vez que se agrega un nuevo bundle se tiene que correr
 " el siguiente comando: vim +BundleClean +BundleInstall! +qa
@@ -68,6 +76,31 @@ filetype indent on
 let &t_Co = 256
 colorscheme vividchalk
 syntax on
+
+" ----------------------------------------------------------------
+" Configuration data for powerline
+"
+set laststatus=2 " Always display the statusline in all windows
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'relativepath', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"RO":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"(Changed)":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': "\u2aa2", 'right': "\u2aa1" },
+      \ 'subseparator': { 'left': "|", 'right': "|" }
+      \ }
 
 " -----------------------------------------------------------------
 "  Cosas misceleanas de vim
@@ -136,12 +169,6 @@ imap <C-S-Right> <ESC>:tabn<CR>
 imap <C-S-Left> :tabp<CR>
 imap <C-S-Left> <ESC>:tabp<CR>
 
-
-" ----------------------------------------------------------------
-" Configuration data for powerline
-"
-set laststatus=2 " Always display the statusline in all windows
-let g:Powerline_symbols = 'fancy'
 
 
 " --------------------------------------------------------------

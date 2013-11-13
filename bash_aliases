@@ -108,3 +108,7 @@ alias otendor-cd="cd /media/data/Proyectos/otendor-data/otendor"
 if [ -f ~/.bash_aliases_trabajo ]; then
     . ~/.bash_aliases_trabajo
 fi
+
+export EDITOR=vim
+export GOPATH=/media/data/Proyectos/entrenamiento-arqueria
+export PATH=$PATH:$GOPATH/bin

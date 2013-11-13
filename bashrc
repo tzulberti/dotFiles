@@ -123,5 +123,4 @@ function color_my_prompt {
 }
 color_my_prompt
 
-. ~/.bash_aliases_trabajo
 
