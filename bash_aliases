@@ -112,3 +112,9 @@ fi
 export EDITOR=vim
 export GOPATH=/media/data/Proyectos/entrenamiento-arqueria
 export PATH=$PATH:$GOPATH/bin
+
+alias pypi-cd="cd /media/data/Proyectos/Flask-PyPi-Proxy/flask_pypi_proxy"
+alias pypi-activate="source ~/envs/pypi/bin/activate"
+
+alias entrenamiento-cd="cd /media/data/Proyectos/entrenamiento-arqueria/entrenamiento"
+alias entrenamiento-activate="source ~/envs/entrenamiento/bin/activate"
