@@ -38,3 +38,5 @@
 [user]
 	name = Tomas Zulberti
 	email = tzulberti@gmail.com
+[push]
+	default = simple
