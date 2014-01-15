@@ -135,6 +135,7 @@ set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
+set nowrap
 
 " Para que en los makefiles los tabs sigan existiendo.
 autocmd FileType make setlocal noexpandtab
