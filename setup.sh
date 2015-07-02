@@ -36,6 +36,11 @@ sudo mount /media/otros
 
 # ahora estas cosas las hago para poder tener configurado el bash como a mi me gusta
 cd /media/data/Proyectos/dotFiles
+
+# para tenga en cuenta el tema de los hooks de git
+mkdir -p ~/.git_template/hooks
+chmod +x $(pwd)/pre-commit.py
+
 ln -s `pwd`/bashrc ~/.bashrc
 ln -s `pwd`/vimrc ~/.vimrc
 ln -s `pwd`/bash_aliases ~/.bash_aliases
@@ -43,6 +48,7 @@ ln -s `pwd`/gitconfig ~/.gitconfig
 ln -s `pwd`/pydistutils.cfg ~/.pydistutils.cfg
 ln -s `pwd`/screenrc ~/.screenrc
 ln -s `pwd`/sqliterc ~/.sqliterc
+ln -s $(pwd)/pre-commit.py ~/.git_template/hooks/pre-commit
 
 
 # crear los virtuale-envs correspondientes

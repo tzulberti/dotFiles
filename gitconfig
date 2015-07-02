@@ -40,3 +40,5 @@
 	email = tzulberti@gmail.com
 [push]
 	default = simple
+[init]
+	templatedir = ~/.git_template
