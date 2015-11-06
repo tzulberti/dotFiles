@@ -118,3 +118,4 @@ alias pypi-activate="source ~/envs/pypi/bin/activate"
 
 alias entrenamiento-cd="cd /media/data/Proyectos/entrenamiento-arqueria/entrenamiento"
 alias entrenamiento-activate="source ~/envs/entrenamiento/bin/activate"
+export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration.py'
