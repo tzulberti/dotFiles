@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# la variable de javahome para todo lo relacionado con java
+export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

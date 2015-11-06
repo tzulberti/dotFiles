@@ -20,9 +20,13 @@ sudo apt-get install -y ia32-libs-multiarch libtxc-dxtn-s2tc0:i386 wine
 
 
 
-
 # ahora estas cosas las hago para poder tener configurado el bash como a mi me gusta
 cd /media/data/Proyectos/dotFiles
+
+# para tenga en cuenta el tema de los hooks de git
+mkdir -p ~/.git_template/hooks
+chmod +x $(pwd)/pre-commit.py
+
 ln -sf $(pwd)/bashrc ~/.bashrc
 ln -sf $(pwd)/vimrc ~/.vimrc
 ln -sf $(pwd)/bash_aliases ~/.bash_aliases
@@ -30,6 +34,7 @@ ln -sf $(pwd)/gitconfig ~/.gitconfig
 ln -sf $(pwd)/pydistutils.cfg ~/.pydistutils.cfg
 ln -sf $(pwd)/screenrc ~/.screenrc
 ln -sf $(pwd)/sqliterc ~/.sqliterc
+ln -s $(pwd)/pre-commit.py ~/.git_template/hooks/pre-commit
 
 
 # crear los virtuale-envs correspondientes
