@@ -21,13 +21,6 @@ CHECKS = [
         'print_filename': True,
     },
     {
-        'output': 'Checking for print statements...',
-        'command': 'grep -n print %s',
-        'match_files': ['.*\.py$'],
-        'ignore_files': ['.*migrations.*', '.*management/commands.*', '.*manage.py', '.*/scripts/.*'],
-        'print_filename': True,
-    },
-    {
         'output': 'Checking for redis pdb...',
         'command': 'grep -n "rdb.set_trace" %s',
         'ignore_files': ['.*pre-commit'],
