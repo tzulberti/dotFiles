@@ -13,6 +13,10 @@ alias pypi-activate="source ~/envs/pypi/bin/activate"
 
 alias entrenamiento-cd="cd /media/data/Proyectos/entrenamiento-arqueria/entrenamiento"
 alias entrenamiento-activate="source ~/envs/entrenamiento/bin/activate"
+
+alias agatha-cd="cd /media/data/Proyectos/agatha-backend/"
+alias agatha-activate="source ~/envs/agatha/bin/activate"
+
 export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration.py'
 # para que siempre use vim para todo lo que sea posible
 export EDITOR=vim
