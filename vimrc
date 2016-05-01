@@ -44,16 +44,25 @@ Bundle "tpope/vim-vividchalk"
 " Bundle "nvie/vim-flake8"
 Bundle 'rust-lang/rust.vim'
 
+" Power line
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
 " Colores en los archivos de css
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 " Configuracion de Go
 Bundle 'https://github.com/jnwhiteh/vim-golang.git'
 
 " Como el Powerline pero sin necesitar de python
-Bundle 'https://github.com/itchyny/lightline.vim.git'
+" Bundle 'https://github.com/itchyny/lightline.vim.git'
 
 " Para las cosas de git
 Bundle 'https://github.com/tpope/vim-fugitive.git'
+
+" Para que use syntaxis para los Dockerfiles
+Bundle 'https://github.com/ekalinin/Dockerfile.vim'
+
+" Para mejorar cosas con el CSV
+" Bundle 'https://github.com/chrisbra/csv.vim'
 
 " Cada vez que se agrega un nuevo bundle se tiene que correr
 " el siguiente comando: vim +BundleClean +BundleInstall! +qa
@@ -82,26 +91,7 @@ syntax on
 " Configuration data for powerline
 "
 set laststatus=2 " Always display the statusline in all windows
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'relativepath', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"RO":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"(Changed)":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': ">>", 'right': "<<" },
-      \ 'subseparator': { 'left': "|", 'right': "|" }
-      \ }
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 
 " -----------------------------------------------------------------
 "  Cosas misceleanas de vim
@@ -147,6 +137,10 @@ autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
 autocmd BufWritePre *.js mark z | %s/ *$//e | 'z
 autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
 autocmd BufWritePre .vimrc mark z | %s/ *$//e | 'z
+autocmd BufWritePre .json mark z | %s/ *$//e | 'z
+autocmd BufWritePre .yaml mark z | %s/ *$//e | 'z
+autocmd BufWritePre .yml mark z | %s/ *$//e | 'z
+autocmd BufWritePre .sh mark z | %s/ *$//e | 'z
 
 " -------------------------------------------------------------------
 "  Cosas relacionadas a la busqueda
