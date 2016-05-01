@@ -42,6 +42,7 @@ Bundle 'Wombat'
 Bundle "tpope/vim-vividchalk"
 " PyFlakes integration
 " Bundle "nvie/vim-flake8"
+Bundle 'rust-lang/rust.vim'
 
 " Colores en los archivos de css
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
