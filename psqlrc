@@ -1,0 +1,4 @@
+\timing
+\set HISTSIZE 2000
+\x auto
+\pset pager
