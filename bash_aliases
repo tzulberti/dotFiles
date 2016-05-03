@@ -1,4 +1,4 @@
-alias pyclean='find . -name "*.pyc" -exec rm -rf {} \;'
+alias pyclean='find . -name "*.pyc" -exec rm -rf {} \; && find . -name "*.so" -exec rm -rf {} \; && find . -name "*.c" -exec rm -rf {} \; && find . -name "*.pxd" -exec rm -rf {} \; '
 
 alias ages_2="cd /media/data/Juegos/Age\ of\ Empires\ II; wine age2_x1.exe"
 
