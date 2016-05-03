@@ -1,4 +1,7 @@
 \timing
 \set HISTSIZE 2000
 \x auto
-\pset pager
+\set HISTCONTROL ignoredups
+\set HISTFILE ~/.psql_history- :DBNAME
+
+\pset pager off
