@@ -40,6 +40,8 @@ Bundle 'pyflakes.vim'
 Bundle 'Wombat'
 " Vim vividchalk color scheme
 Bundle "tpope/vim-vividchalk"
+Bundle 'molokai'
+Bundle 'wombat256.vim'
 " PyFlakes integration
 " Bundle "nvie/vim-flake8"
 Bundle 'rust-lang/rust.vim'
@@ -60,6 +62,11 @@ Bundle 'https://github.com/tpope/vim-fugitive.git'
 
 " Para que use syntaxis para los Dockerfiles
 Bundle 'https://github.com/ekalinin/Dockerfile.vim'
+
+" Para que tambien muestre la diferencia con los archivos
+" de mercurial
+Bundle 'mhinz/vim-signify'
+
 
 " Para mejorar cosas con el CSV
 " Bundle 'https://github.com/chrisbra/csv.vim'
@@ -84,7 +91,11 @@ filetype indent on
 "  Es necesario el &t_Co = 256 para que el powerline funcione con
 "  colores correctamente
 let &t_Co = 256
-colorscheme vividchalk
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+colorscheme molokai
 syntax on
 
 " ----------------------------------------------------------------
@@ -99,6 +110,7 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title                " change the terminal's title
+set titleold=""
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 " Para que no cree los archivos de backup y no joda la vida
@@ -133,14 +145,14 @@ autocmd FileType make setlocal noexpandtab
 
 " borra los espacios extras al final de las lineas
 " (guarda antes la posición y la restablece luego)
-autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
-autocmd BufWritePre *.js mark z | %s/ *$//e | 'z
-autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
-autocmd BufWritePre .vimrc mark z | %s/ *$//e | 'z
-autocmd BufWritePre .json mark z | %s/ *$//e | 'z
-autocmd BufWritePre .yaml mark z | %s/ *$//e | 'z
-autocmd BufWritePre .yml mark z | %s/ *$//e | 'z
-autocmd BufWritePre .sh mark z | %s/ *$//e | 'z
+"autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
+"autocmd BufWritePre *.js mark z | %s/ *$//e | 'z
+"autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
+"autocmd BufWritePre .vimrc mark z | %s/ *$//e | 'z
+"autocmd BufWritePre .json mark z | %s/ *$//e | 'z
+"autocmd BufWritePre .yaml mark z | %s/ *$//e | 'z
+"autocmd BufWritePre .yml mark z | %s/ *$//e | 'z
+"autocmd BufWritePre .sh mark z | %s/ *$//e | 'z
 
 " -------------------------------------------------------------------
 "  Cosas relacionadas a la busqueda
