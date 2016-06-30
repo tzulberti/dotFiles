@@ -22,6 +22,10 @@ export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration
 export EDITOR=vim
 
 
+export GOROOT=/opt/local/go
+export PATH=$PATH:$GOROOT/bin
+
+
 # todo lo relacionado con el trabajo 
 if [ -f ~/.bash_aliases_trabajo ]; then
     . ~/.bash_aliases_trabajo
