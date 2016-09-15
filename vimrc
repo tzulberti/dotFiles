@@ -95,7 +95,7 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-colorscheme molokai
+colorscheme vividchalk
 syntax on
 
 " ----------------------------------------------------------------
@@ -218,4 +218,9 @@ map <F5> :set paste!<CR>:set ruler<CR>
 imap <F7> <esc>:w !sudo tee > /dev/null %
 map <F7> :w !sudo tee > /dev/null %
 ca w!! w !sudo tee "%"
+
+" Para que al buscar por nombre no eliga el primero que aparece
+" sino que se comporte como bash
+set wildmode=longest,list,full
+set wildmenu
 
