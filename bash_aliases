@@ -2,7 +2,7 @@
 alias ages_2="cd /media/data/Juegos/Age\ of\ Empires\ II; wine age2_x1.exe"
 
 # la rerenfencia a los proyectos de python
-alias pyclean='find . -name "*.pyc" -exec rm -rf {} \; && find . -name "*.so" -exec rm -rf {} \; && find . -name "*.c" -exec rm -rf {} \;'
+alias pyclean='find . -name "*.pyc" -exec rm -rf {} \; && find . -name "*.so" -exec rm -rf {} \; && find . -name "*.c" -exec rm -rf {} \; && find . -name "*.pyo" -exec rm -rf {} \;'
 
 alias entrenamiento-cd="cd /media/data/Proyectos/entrenamiento-arqueria/entrenamiento"
 alias entrenamiento-activate="source ~/envs/entrenamiento/bin/activate"
