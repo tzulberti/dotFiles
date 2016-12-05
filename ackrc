@@ -1,2 +1,7 @@
 --type-add=yaml:ext:yaml,yml
+--type-add=pxd:ext:pxd
+
+# Ignore python internal files
+--ignore-dir=build
+--ignore-dir=.eggs
 
