@@ -19,6 +19,14 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# better formatting
+HISTTIMEFORMAT='%F %T '
+
+# save the history each time that the command is typed (solve
+# issue when the terminal was closed improperly)
+PROMPT_COMMAND='history -a'
+
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
