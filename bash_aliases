@@ -9,6 +9,7 @@ alias entrenamiento-activate="source ~/envs/entrenamiento/bin/activate"
 
 alias agatha-cd="cd /media/data/Proyectos/agatha-backend/"
 alias agatha-activate="source ~/envs/agatha/bin/activate"
+alias noborrar-cd='cd /home/tzulberti/NO_BORRAR'
 
 export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration.py'
 
