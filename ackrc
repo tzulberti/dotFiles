@@ -4,4 +4,5 @@
 # Ignore python internal files
 --ignore-dir=build
 --ignore-dir=.eggs
+--ignore-dir=.tox
 
