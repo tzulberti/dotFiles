@@ -93,6 +93,7 @@ ln -sf $(pwd)/screenrc ~/.screenrc
 ln -sf $(pwd)/sqliterc ~/.sqliterc
 ln -sf $(pwd)/pre-commit.py ~/.git_template/hooks/pre-commit
 ln -sf $(pwd)/gtk.css  ~/.config/gtk-3.0/gtk.css
+ln -sf $(pwd)/my.cnf  ~/.my.cnf
 
 
 # bajo todas las dependencias de bower y esas cosas para ditella
