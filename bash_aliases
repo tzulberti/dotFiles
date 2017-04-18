@@ -11,6 +11,8 @@ alias agatha-cd="cd /media/data/Proyectos/agatha-backend/"
 alias agatha-activate="source ~/envs/agatha/bin/activate"
 alias noborrar-cd='cd /home/tzulberti/NO_BORRAR'
 
+alias disable-touchpad="xinput | grep -i 'optical mouse ' && xinput | grep -i 'Synaptics TouchPad' && xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+
 export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration.py'
 
 
