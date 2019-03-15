@@ -12,6 +12,9 @@ alias agatha-activate="source ~/envs/agatha/bin/activate"
 alias noborrar-cd='cd /home/tzulberti/NO_BORRAR'
 
 alias disable-touchpad="xinput | grep -i 'optical mouse ' && xinput | grep -i 'Synaptics TouchPad' && xinput set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration.py'
 
