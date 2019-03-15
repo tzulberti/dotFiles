@@ -82,7 +82,11 @@ mkdir -p ~/.git_template/hooks
 chmod +x $(pwd)/pre-commit.py
 
 
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 mkdir -p ~/.config/gtk-3.0/
+mkdir -p ~/.config/nvim/
 
 ln -sf $(pwd)/bashrc ~/.bashrc
 ln -sf $(pwd)/vimrc ~/.vimrc
@@ -94,6 +98,8 @@ ln -sf $(pwd)/sqliterc ~/.sqliterc
 ln -sf $(pwd)/pre-commit.py ~/.git_template/hooks/pre-commit
 ln -sf $(pwd)/gtk.css  ~/.config/gtk-3.0/gtk.css
 ln -sf $(pwd)/my.cnf  ~/.my.cnf
+ln -sf $(pwd)/psqlrc  ~/.psqlrc
+ln -sf $(pwd)/nvimrc ~/.config/nvim/init.vim
 
 
 # bajo todas las dependencias de bower y esas cosas para ditella

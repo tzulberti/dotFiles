@@ -50,8 +50,8 @@ def matches_file(file_name, match_files):
 def check_files(files, check, repo_root):
     result = 0
     for file_name in files:
-        if not 'match_files' in check or matches_file(file_name, check['match_files']):
-            if not 'ignore_files' in check or not matches_file(file_name, check['ignore_files']):
+        if 'match_files' not in check or matches_file(file_name, check['match_files']):
+            if 'ignore_files' not in check or not matches_file(file_name, check['ignore_files']):
                 process = subprocess.Popen(check['command'] % (repo_root + '/' + file_name), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 out, err = process.communicate()
                 if out or err:
@@ -71,7 +71,7 @@ def main(all_files):
     p = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'], stdout=subprocess.PIPE)
     out, _ = p.communicate()
     repo_root = out.splitlines()[0]
-    
+
     files = []
     if all_files:
         for root, dirs, file_names in os.walk('.'):
@@ -84,14 +84,14 @@ def main(all_files):
             match = modified.match(line)
             if match:
                 files.append(match.group('name'))
-    
-    result = 0 
+
+    result = 0
     for check in CHECKS:
         result = check_files(files, check, repo_root)
         if result:
             print 'Failed for check: %s' % check['output']
             break
-    
+
     sys.exit(result)
 
 
