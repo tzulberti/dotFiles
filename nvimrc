@@ -96,14 +96,15 @@ autocmd FileType make setlocal noexpandtab
 
 " borra los espacios extras al final de las lineas
 " (guarda antes la posición y la restablece luego)
-"autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
+autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
+autocmd BufWritePre *.rst mark z | %s/ *$//e | 'z
 "autocmd BufWritePre *.js mark z | %s/ *$//e | 'z
 "autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
 "autocmd BufWritePre .vimrc mark z | %s/ *$//e | 'z
 "autocmd BufWritePre .json mark z | %s/ *$//e | 'z
-"autocmd BufWritePre .yaml mark z | %s/ *$//e | 'z
-"autocmd BufWritePre .yml mark z | %s/ *$//e | 'z
-"autocmd BufWritePre .sh mark z | %s/ *$//e | 'z
+autocmd BufWritePre .yaml mark z | %s/ *$//e | 'z
+autocmd BufWritePre .yml mark z | %s/ *$//e | 'z
+autocmd BufWritePre .sh mark z | %s/ *$//e | 'z
 
 " -------------------------------------------------------------------
 "  Cosas relacionadas a la busqueda
@@ -144,7 +145,7 @@ imap <C-S-Left> <ESC>:tabp<CR>
 " Por default muestra el numero de linea, pero eso se puede ocultar
 " con F2
 set number
-map <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+map <F2> :set nonumber!<CR>:set foldcolumn=0<CR><CR>:IndentLinesToggle<CR><CR>:GitGutterToggle<CR>
 
 " Abre u oculta el navegador de archivos
 imap <F3> <esc>:NERDTreeToggle<CR>

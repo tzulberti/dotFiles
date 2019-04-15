@@ -122,3 +122,4 @@ function color_my_prompt {
 }
 color_my_prompt
 
+source /home/tzulberti/.local/bin/activate.sh

@@ -15,6 +15,7 @@ alias disable-touchpad="xinput | grep -i 'optical mouse ' && xinput | grep -i 'S
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias background-color-reset="xtermcontrol --bg '#000000'"
 
 export ENTRENAMIENTO_CONFIGURATION='/home/tzulberti/.entrenamiento-configuration.py'
 
@@ -30,7 +31,7 @@ export PATH=$PATH:/opt/local/apache-maven-3.3.9/bin
 
 # variables para simplificarme la vida
 export WORKSPACE=/meda/data/Proyectos
-
+export DOWNLOADS=/home/tzulberti/Downloads
 
 # todo lo relacionado con el trabajo 
 if [ -f ~/.bash_aliases_trabajo ]; then
