@@ -31,6 +31,9 @@ call plug#begin(g:plugged_home)
     " Python code checker
     Plug 'w0rp/ale'
 
+    " Grammarous checker for vim
+    Plug 'rhysd/vim-grammarous'
+
 
 call plug#end()
 
@@ -51,9 +54,6 @@ syntax on
 " ----------------------------------------------------------------
 " Configuration data for powerline
 "
-set laststatus=2 " Always display the statusline in all windows
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-
 
 " -----------------------------------------------------------------
 "  Cosas misceleanas de vim
@@ -98,6 +98,7 @@ autocmd FileType make setlocal noexpandtab
 " (guarda antes la posición y la restablece luego)
 autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
 autocmd BufWritePre *.rst mark z | %s/ *$//e | 'z
+autocmd BufWritePre *.md mark z | %s/ *$//e | 'z
 "autocmd BufWritePre *.js mark z | %s/ *$//e | 'z
 "autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
 "autocmd BufWritePre .vimrc mark z | %s/ *$//e | 'z
@@ -182,3 +183,8 @@ set wildmenu
 " No mostrar en ciertos tipos de buffers y archivos
 let g:indentLine_fileTypeExclude = ['text', 'sh', 'help', 'terminal']
 let g:indentLine_bufNameExclude = ['NERD_tree.*', 'term:.*']
+
+" Para que no ocule los " en los json y los * en los archivos de markup
+" y ese estilo de cosas
+let g:indentLine_setConceal = 0
+
