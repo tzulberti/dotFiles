@@ -5,4 +5,5 @@
 --ignore-dir=build
 --ignore-dir=.eggs
 --ignore-dir=.tox
-
+--ignore-file=is:.coverage
+--ignore-file=is:nosetests.xml

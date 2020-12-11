@@ -6,6 +6,7 @@ endif
 
 
 " Plugins List
+" Reupdate list running :PlugInstall
 call plug#begin(g:plugged_home)
     " Para las cosas de git
     Plug 'tpope/vim-fugitive'
@@ -33,6 +34,9 @@ call plug#begin(g:plugged_home)
 
     " Grammarous checker for vim
     Plug 'rhysd/vim-grammarous'
+
+    " TOML
+    Plug 'cespare/vim-toml'
 
 
 call plug#end()
@@ -100,12 +104,13 @@ autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
 autocmd BufWritePre *.rst mark z | %s/ *$//e | 'z
 autocmd BufWritePre *.md mark z | %s/ *$//e | 'z
 "autocmd BufWritePre *.js mark z | %s/ *$//e | 'z
-"autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
+autocmd BufWritePre *.sql mark z | %s/ *$//e | 'z
 "autocmd BufWritePre .vimrc mark z | %s/ *$//e | 'z
 "autocmd BufWritePre .json mark z | %s/ *$//e | 'z
 autocmd BufWritePre .yaml mark z | %s/ *$//e | 'z
 autocmd BufWritePre .yml mark z | %s/ *$//e | 'z
 autocmd BufWritePre .sh mark z | %s/ *$//e | 'z
+autocmd BufWritePre .toml mark z | %s/ *$//e | 'z
 
 " -------------------------------------------------------------------
 "  Cosas relacionadas a la busqueda
