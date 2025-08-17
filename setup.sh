@@ -6,7 +6,8 @@ LOG_FILE='/tmp/local_setup.log'
 
 function add_dependencies_for_external_repos() {
   sudo apt-get update
-  sudo apt-get install -y apt-transport-https ca-certificates wget ca-certificates curl curl
+  sudo apt-get install -y apt-transport-https ca-certificates wget ca-certificates curl
+  sudo apt-get install  -y gnupg2 gnupg1 gnupg
   sudo install -m 0755 -d /etc/apt/keyrings
 }
 
@@ -28,9 +29,9 @@ function add_docker_external_repo() {
 }
 
 function enable_snap() {
-  sudo rm /etc/apt/preferences.d/nosnap.pref
-  sudo apt update
-  sudo apt install snapd
+  sudo rm -rf /etc/apt/preferences.d/nosnap.pref
+  sudo apt-get update
+  sudo apt-get install -y snapd
 }
 
 function install_packages() {
@@ -82,9 +83,9 @@ function clone_repos() {
   )
 
   cd $HOME/Projects
-  for repo in ${my_repos}; do
+  for repo in ${my_repos[@]}; do
     git clone $repo
-  end
+  done
 }
 
 function configuration_files() {
@@ -126,15 +127,15 @@ function main() {
     "clone_repos"
     "configuration_files"
   )
-  for func_name in ${functions_to_execute}; do
+  for func_name in ${functions_to_execute[@]}; do
     if grep -q "Finished $func_name" $LOG_FILE ; then
       print_output "Skipping $func_name because it is already done"
     else
       print_output "Starting $func_name"
       eval $func_name
       print_output "Finished $func_name"
-    end 
-  end
+    fi 
+  done
 }
 
 
