@@ -119,4 +119,6 @@ function color_my_prompt {
 }
 color_my_prompt
 
-source /home/tzulberti/.local/bin/activate.sh
+
+. "$HOME/.cargo/env"
+eval "$(/home/tzulberti/.local/bin/mise activate bash)"

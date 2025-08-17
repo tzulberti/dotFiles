@@ -2,161 +2,140 @@
 set -e
 set -u
 
+LOG_FILE='/tmp/local_setup.log'
 
-# file paths
-echo 'UUID=48c26bd7-a385-439f-ad98-f80e947d1e60   /media/data       ext4    rw,nosuid,nodev,uhelper=udisks2'  | sudo tee --append /etc/fstab
-sudo mkdir /media/data
-sudo mount /media/data
+function add_dependencies_for_external_repos() {
+  sudo apt-get update
+  sudo apt-get install -y apt-transport-https ca-certificates wget ca-certificates curl curl
+  sudo install -m 0755 -d /etc/apt/keyrings
+}
 
-# para que no me pregunte nada al instalar Java
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+function add_chrome_external_repo() {
+  wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+  sudo apt-get update
+}
 
-# tengo que actualizar para que fetchee los nuevos repos
-sudo apt-get update
+function add_docker_external_repo() {
+  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# para que valide el tema del setup de docker
-sudo apt-get install -y apt-transport-https ca-certificates
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+}
 
-# agrego los repositorios que necesito para Java, Virtualbox y Docker
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+function enable_snap() {
+  sudo rm /etc/apt/preferences.d/nosnap.pref
+  sudo apt update
+  sudo apt install snapd
+}
 
+function install_packages() {
+  sudo apt-get install -y htop vim exuberant-ctags unzip unrar curl vim-nox
+  sudo apt-get install -y mplayer easytag mpv mediainfo
+  sudo apt-get install -y google-chrome-stable
+}
 
-echo 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' | sudo tee --append /etc/apt/sources.list
-echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' | sudo tee --append /etc/apt/sources.list
-sudo apt-get update
+function install_development_tools() {
+  sudo apt-get install -y git mercurial subversion
+  sudo apt-get install -y build-essential python3-pip python3-virtualenv
+  sudo apt-get install -y postgresql libpq-dev
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  curl https://mise.run | sh
+}
 
-# paquetes comunes que uso siempre
-sudo apt-get install -y htop vim exuberant-ctags unzip unrar curl chromium-browser vim-nox
-sudo apt-get install -y git mercurial subversion
-sudo apt-get install -y mplayer easytag mpv mediainfo
+function install_snap_packages() {
+  sudo snap install code --classic
+  sudo snap install postman
+}
 
-# lo tengo que instalar primero porque me pregunta de confirmar
-sudo apt-get install -y oracle-java8-installer
-
-# ahora instalo el virtualbox
-sudo apt-get install -y virtualbox-5.1
-
-# todas las cosas que necesito para poder trabajar en los diferentes
-# proyectos.
-sudo apt-get install -y python-dev python-setuptools build-essential
-sudo easy_install pip
-sudo easy_install --upgrade setuptools
-sudo pip install virtualenv
-
-sudo apt-get install -y libxml2-dev libxslt-dev python-dev zlib1g-dev
-sudo apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev
-
-# se encarga de instalar todo lo relacionado a la base de datos
-sudo apt-get install -y postgresql libpq-dev pgadmin3
-
-# se encarga de instalar todo lo necesario para que me funcionen los diferentes proyectos de wine
-sudo apt-get install -y ia32-libs-multiarch 
-sudo apt-get install -y libtxc-dxtn-s2tc0:i386 wine playonlinux
-
-# las librerias que uso por el tema de lxml y estas yerbas
-sudo apt-get install -y gfortran libatlas-base-dev libatlas3-base ack-grep
-sudo apt-get install -y libjpeg-dev libxml2-dev libfreetype6-dev
-sudo apt-get install -y libpng-dev libxslt1-dev
-sudo apt-get install -y libffi-dev
-
-# porque usamos shapely
-sudo apt-get install -y libgeos-c1v5 libgdal-dev
-
-# instalo nodejs y todas las cosas necesarias para los proyectos que
-# hicimos en vertice
-sudo apt-get install -y npm nodejs
-sudo npm install -g grunt-cli 
-sudo npm install -g bower
-
-# por un problema con bower
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-
-# ahora estas cosas las hago para poder tener configurado el bash como a mi me gusta
-cd /media/data/Proyectos/dotFiles
-
-# para tenga en cuenta el tema de los hooks de git
-mkdir -p ~/.git_template/hooks
-chmod +x $(pwd)/pre-commit.py
-
-
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+function configure_vim() {
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-mkdir -p ~/.config/gtk-3.0/
-mkdir -p ~/.config/nvim/
-
-ln -sf $(pwd)/bashrc ~/.bashrc
-ln -sf $(pwd)/vimrc ~/.vimrc
-ln -sf $(pwd)/bash_aliases ~/.bash_aliases
-ln -sf $(pwd)/gitconfig ~/.gitconfig
-ln -sf $(pwd)/pydistutils.cfg ~/.pydistutils.cfg
-ln -sf $(pwd)/screenrc ~/.screenrc
-ln -sf $(pwd)/sqliterc ~/.sqliterc
-ln -sf $(pwd)/pre-commit.py ~/.git_template/hooks/pre-commit
-ln -sf $(pwd)/gtk.css  ~/.config/gtk-3.0/gtk.css
-ln -sf $(pwd)/my.cnf  ~/.my.cnf
-ln -sf $(pwd)/psqlrc  ~/.psqlrc
-ln -sf $(pwd)/nvimrc ~/.config/nvim/init.vim
+}
 
 
-# bajo todas las dependencias de bower y esas cosas para ditella
-cd /media/data/Proyectos/ditella-scrapping-web
-npm install
-bower install
+function instal_heroic() {
+  flatpak install flathub com.heroicgameslauncher.hgl
+  flatpak run com.heroicgameslauncher.hgl
+}
 
 
-# --------------------------------------------------------------------
-# Download pip packages
 
-cd /media/data/Proyectos/entrenamiento-arqueria
-virtualenv --no-site-packages ~/envs/entrenamiento
-~/envs/entrenamiento/bin/pip install -e .
+function install_mise_languages() {
+  mise install java
+  mise install java17
+  mise install rust
+  mise install go
+  mise install python
+}
 
-cd /media/data/Proyectos/ditella-scrapping-lotes-backend
-virtualenv --no-site-packages ~/envs/lotes
-~/envs/lotes/bin/pip install -e .
+function clone_repos() {
+  mkdir -p $HOME/Projects
+  my_repos=(
+    "https://github.com/tzulberti/dotFiles.git"
+    "https://github.com/PyAr/wiki.git"
+    "https://github.com/PyAr/pyarweb.git"
+  )
 
-cd /media/data/Proyectos/agatha-backend
-virtualenv --no-site-packages ~/envs/agatha
-~/envs/lotes/bin/pip install -e .
+  cd $HOME/Projects
+  for repo in ${my_repos}; do
+    git clone $repo
+  end
+}
+
+function configuration_files() {
+  mkdir -p ~/.config/gtk-3.0/
+  mkdir -p ~/.config/nvim/
+  cd $HOME/Projects
+
+  ln -sf $(pwd)/bashrc ~/.bashrc
+  ln -sf $(pwd)/vimrc ~/.vimrc
+  ln -sf $(pwd)/bash_aliases ~/.bash_aliases
+  ln -sf $(pwd)/gitconfig ~/.gitconfig
+  ln -sf $(pwd)/pydistutils.cfg ~/.pydistutils.cfg
+  ln -sf $(pwd)/screenrc ~/.screenrc
+  ln -sf $(pwd)/sqliterc ~/.sqliterc
+  ln -sf $(pwd)/pre-commit.py ~/.git_template/hooks/pre-commit
+  ln -sf $(pwd)/gtk.css  ~/.config/gtk-3.0/gtk.css
+  ln -sf $(pwd)/my.cnf  ~/.my.cnf
+  ln -sf $(pwd)/psqlrc  ~/.psqlrc
+  ln -sf $(pwd)/nvimrc ~/.config/nvim/init.vim
+}
 
 
-# --------------------------------------------------------------------
-# Other less common programs
+function print_output() {
+  echo "$(date) $1" | tee -a $LOG_FILE
+}
 
-sudo mkdir -p /opt/local
-sudo chown tzulberti:tzulberti /opt/local
+function main() {
+  functions_to_execute=(
+    "add_dependencies_for_external_repos"
+    "add_chrome_external_repo"
+    "add_docker_external_repo"
+    "enable_snap"
+    "install_packages"
+    "install_development_tools"
+    "install_snap_packages"
+    "configure_vim"
+    "instal_heroic"
+    "install_mise_languages"
+    "clone_repos"
+    "configuration_files"
+  )
+  for func_name in ${functions_to_execute}; do
+    if grep -q "Finished $func_name" $LOG_FILE ; then
+      print_output "Skipping $func_name because it is already done"
+    else
+      print_output "Starting $func_name"
+      eval $func_name
+      print_output "Finished $func_name"
+    end 
+  end
+}
 
-# Golang
-cd /opt/local
-wget "https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz"
-tar -xzf go1.6.2.linux-amd64.tar.gz
-rm -rf go1.6.2.linux-amd64.tar.gz
 
-
-# Rustlang
-curl -sSf https://static.rust-lang.org/rustup.sh | sh
-
-# Maven
-cd /opt/local
-wget "http://apache.dattatec.com/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz"
-tar -xzf apache-maven-3.3.9-bin.tar.gz
-rm -rf apache-maven-3.3.9-bin.tar.gz
-
-# Docker
-sudo apt-get install -y linux-image-extra-$(uname -r)
-sudo apt-get install -y docker-engine
-sudo service docker start
-
-# Eclipse (me baja el fucking installer en vez del IDE)
-# cd /opt/local
-# wget "http://eclipse.c3sl.ufpr.br/oomph/epp/neon/R/eclipse-inst-linux64.tar.gz"
-
-# Download JDownloader (issues because it might require Mega to download the JAR)
-# cd /opt/local
-
-#  Latex y otras cosas que tardan
-sudo apt-get install texlive-latex-base texlive-latex-extra texlive-latex-recommended
+main
