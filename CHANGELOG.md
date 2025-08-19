@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/tzulberti/dotFiles/compare/v1.0.0...v1.0.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* update the readme ([#6](https://github.com/tzulberti/dotFiles/issues/6)) ([2f3c522](https://github.com/tzulberti/dotFiles/commit/2f3c5229cc4ddb316ee03f16150a581478e80332))
+
 ## 1.0.0 (2025-08-19)
 
 
