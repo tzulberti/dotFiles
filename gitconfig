@@ -40,5 +40,6 @@
 	email = tzulberti@gmail.com
 [push]
 	default = simple
+  autoSetupRemote = true
 [init]
 	templatedir = ~/.git_template
